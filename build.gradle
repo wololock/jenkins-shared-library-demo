@@ -1,0 +1,50 @@
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'jacoco'
+
+repositories {
+    mavenLocal()
+    jcenter()
+    google()
+    maven {
+        url 'https://repo.jenkins-ci.org/releases'
+    }
+    maven {
+        url 'https://repo.jenkins-ci.org/public'
+    }
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['src', 'vars']
+        }
+    }
+    test {
+        groovy {
+            srcDirs = ['test']
+        }
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+test {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
+dependencies {
+    compile 'com.cloudbees:groovy-cps:1.22'
+    compile 'org.codehaus.groovy:groovy-all:2.4.12'
+
+    testCompile 'com.lesfurets:jenkins-pipeline-unit:1.2'
+    testCompile 'junit:junit:4.13'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
