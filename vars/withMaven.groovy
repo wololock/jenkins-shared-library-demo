@@ -8,8 +8,8 @@ final String DOCKER_IMAGE = "maven"
 
 @Field
 final List<String> PARAMS = [
-    "-v /home/wololock/.m2/settings.xml:/var/maven/.m2/settings.xml:ro",
-    "-v /home/wololock/.m2/repository/:/var/maven/.m2/repository/:rw,z",
+    '-v $HOME/.m2/settings.xml:/var/maven/.m2/settings.xml:ro',
+    '-v $HOME/.m2/repository/:/var/maven/.m2/repository/:rw,z',
     "-e MAVEN_CONFIG=/var/maven/.m2"
 ]
 
